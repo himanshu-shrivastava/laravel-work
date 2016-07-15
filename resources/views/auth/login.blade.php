@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    <style>.google{background-color:#dd4b39;border-color:#dd4b39;}</style>
+    <style>
+        .google{background-color:#dd4b39;border-color:#dd4b39;}
+        .google:hover{background-color:#c74230;border-color:#c74230;}
+    </style>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
