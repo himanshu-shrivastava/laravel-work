@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <style>.google{background-color:#dd4b39;border-color:#dd4b39;}</style>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -62,11 +63,8 @@
                     <div class="col-lg-4">
                         <p class="text-center">Or use social login</p>
                         <a href="{{ route('social.redirect', ['provider' => 'facebook']) }}" class="btn btn-lg btn-primary btn-block facebook" type="submit">Facebook</a>
-                        <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-lg btn-primary btn-block google" type="submit">Google</a></div>
+                        <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-lg btn-primary btn-block google" type="submit">Google+</a></div>
                     <div class="col-lg-4"></div>
-
-
-
                 </div>
             </div>
         </div>

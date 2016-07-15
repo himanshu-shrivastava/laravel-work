@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -68,5 +70,39 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function getSocialRedirect( $provider )
+    {
+        $providerKey = \Config::get('services.' . $provider);
+        if(empty($providerKey))
+            return view('pages.status')
+                ->with('error','No such provider');
+        return Socialite::driver( $provider )->redirect();
+    }
+
+    public function getSocialHandle( $provider )
+    {
+        $user = Socialite::driver( $provider )->user();
+
+        $socialUser = null;
+
+        //Check is this email present
+        $userCheck = User::where('email', '=', $user->email)->first();
+        if(!empty($userCheck))
+        {
+            $socialUser = $userCheck;
+        }
+        else
+        {
+            $socialUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => bcrypt('password')
+            ]);
+        }
+        Auth::login($socialUser);
+
+        return redirect('/home');
     }
 }

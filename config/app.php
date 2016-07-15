@@ -210,7 +210,7 @@ return [
         /*
          * Socialite - Social Login
          */
-        'Socialize' => Laravel\Socialite\Facades\Socialite::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
