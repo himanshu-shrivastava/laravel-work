@@ -84,23 +84,35 @@ class AuthController extends Controller
     public function getSocialHandle( $provider )
     {
         $user = Socialite::driver( $provider )->user();
-
         $socialUser = null;
 
         //Check is this email present
-        $userCheck = User::where('email', '=', $user->email)->first();
+        $userCheck = User::getUserDetails($user->id);
         if(!empty($userCheck))
         {
             $socialUser = $userCheck;
+
+            $inputs         =   [
+                'name'  => $user->name,
+                'email' => $user->email
+            ];
+
+            User::updateUserDetail($user->id, $inputs);
         }
         else
         {
-            $socialUser = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => bcrypt('password')
-            ]);
+            $inputs         =   [
+                'name'          => $user->name,
+                'auth_source'   => $provider,
+                'auth_id'       => $user->id
+            ];
+
+            if($user->email)
+                $inputs['email']= $user->email;
+
+            $socialUser = User::create($inputs);
         }
+
         Auth::login($socialUser);
 
         return redirect('/home');

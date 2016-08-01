@@ -5,6 +5,8 @@
     <style>
         .google{background-color:#dd4b39;border-color:#dd4b39;}
         .google:hover{background-color:#c74230;border-color:#c74230;}
+        .twitter{background-color: #46c0fb;border-color: #46c0fb;}
+        .twitter:hover{background-color: #00c7fb;border-color: #00c7fb;}
     </style>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -66,7 +68,9 @@
                     <div class="col-lg-4">
                         <p class="text-center">Or use social login</p>
                         <a href="{{ route('social.redirect', ['provider' => 'facebook']) }}" class="btn btn-lg btn-primary btn-block facebook" type="submit">Facebook</a>
-                        <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-lg btn-primary btn-block google" type="submit">Google+</a></div>
+                        <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-lg btn-primary btn-block google" type="submit">Google+</a>
+                        <a href="{{ route('social.redirect', ['provider' => 'twitter']) }}" class="btn btn-lg btn-primary btn-block twitter" type="submit">Twitter+</a>
+                    </div>
                     <div class="col-lg-4"></div>
                 </div>
             </div>
